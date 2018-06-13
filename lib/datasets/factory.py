@@ -15,8 +15,13 @@ from datasets.pascal_voc import pascal_voc
 from datasets.coco import coco
 from datasets.imagenet import imagenet
 from datasets.vg import vg
+from datasets.tomato import tomato
 
 import numpy as np
+
+for split in ['trainval', 'test']:
+  name = 'tomato_{}'.format(split)
+  __sets[name] = {lambda split=split: tomato(split)}
 
 # Set up voc_<year>_<split>
 for year in ['2007', '2012']:
@@ -51,7 +56,7 @@ for version in ['150-50-20', '150-50-50', '500-150-80', '750-250-150', '1750-700
     for split in ['minitrain', 'smalltrain', 'train', 'minival', 'smallval', 'val', 'test']:
         name = 'vg_{}_{}'.format(version,split)
         __sets[name] = (lambda split=split, version=version: vg(version, split))
-        
+
 # set up image net.
 for split in ['train', 'val', 'val1', 'val2', 'test']:
     name = 'imagenet_{}'.format(split)
